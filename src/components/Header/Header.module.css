@@ -1,0 +1,37 @@
+.nav {
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 100rem;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(45, 59, 67, 0.271);
+}
+
+.tools {
+  display: flex;
+  gap: 0 3rem;
+}
+
+.tools_box {
+  display: flex;
+  align-items: center;
+  gap: 0 5px;
+
+  padding: .7rem 1.4rem;
+  border-radius: 10rem;
+  transition: background-color .2s ease-in-out;
+}
+
+.tools_box:hover {
+  background-color: #e9ecef;
+}
+
+.tools__revenue {
+  padding: .7rem 1.4rem;
+  border-radius: 10rem;
+  color: #fff;
+  background-color: #000;
+}
+.menu {
+  display: flex;
+}
