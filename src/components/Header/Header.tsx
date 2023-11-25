@@ -43,8 +43,8 @@ const Header = () => {
             <div className={style.menu}>
               <img src={chat} alt="chat icon" />
               <img src={notifications} alt="notifications icon" />
-              <div className="menu__group">
-                <span className="menu__group--text">OJ</span>
+              <div className={style.menu__group}>
+                <span className={style.menu__group_text}>OJ</span>
                 <img src={menu} alt="menu icon" />
               </div>
             </div>

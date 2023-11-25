@@ -26,6 +26,7 @@ a {
 }
 
 body {
-  padding: 2rem 5rem;
+  padding: 2rem 8rem;
   font-size: 1.6rem;
+  height: 100vh; /* strike this line out */
 }

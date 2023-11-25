@@ -1,0 +1,41 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem 0;
+
+  /* background-color: blueviolet; */
+  padding: 1.5rem;
+  width: 5rem;
+  border-radius: 10rem;
+  box-shadow: 0 2px 6px rgba(45, 59, 67, 0.271);
+
+  position: fixed;
+  top: 30%;
+}
+
+.icon_box {
+  background-color: #fff;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  transition: filter 0.2s ease-in-out;
+}
+
+.icon_box:hover {
+  background-color: #e9ecef;
+}
+
+.icons {
+  width: 3rem;
+  filter: grayscale(95%);
+  transition: filter 0.2s ease-in-out;
+}
+
+.icon_box:hover .icons {
+  cursor: pointer;
+  filter: grayscale(0%);
+}
