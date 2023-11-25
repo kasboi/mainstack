@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem 0;
+  gap: 1rem 0;
 
   /* background-color: blueviolet; */
-  padding: 1.5rem;
+  padding: .6rem .8rem;
   width: 5rem;
   border-radius: 10rem;
   box-shadow: 0 2px 6px rgba(45, 59, 67, 0.271);

@@ -11,8 +11,12 @@ import chat from "../../assets/Header/chat.png"
 import notifications from "../../assets/Header/notifications.png"
 import menu from "../../assets/Header/menu.png"
 
+import { ChevronDownOutline } from "react-ionicons"
+
+import { useState } from "react"
 
 const Header = () => {
+    const [appsToggle, setAppsToggle] = useState(false)
     return (
         <nav className={style.nav}>
             <div className="logo">
@@ -35,18 +39,44 @@ const Header = () => {
                     <img src={crm} alt="crm icon" />
                     <span>CRM</span>
                 </div>
-                <div className={`${style.tools_box} ${style.tools__apps}`}>
-                    <img src={apps} alt="apps icon" />
-                    <span>Apps</span>
-                </div>
+                {appsToggle && (
+                    <div
+                        className={`${style.tools_box} ${style.tools__apps_toggle}`}
+                        onClick={() => setAppsToggle(!appsToggle)}
+                    >
+                        <img src={apps} alt="apps icon" />
+                        <span>Apps</span>
+                    </div>
+                )}
+                {!appsToggle && (
+                    <div
+                        className={`${style.tools_box} ${style.tools__apps}`}
+                        onClick={() => setAppsToggle(!appsToggle)}
+                    >
+                        <div className={style.tools__apps_left}>
+                            <img src={apps} alt="apps icon" />
+                            <span>Apps</span>
+                        </div>
+                        <div className={style.tools__apps_right}>
+                            <span>Link in Bio</span>
+                            <ChevronDownOutline
+                                color={"#00000"}
+                                title={"apps icon"}
+                                height="20px"
+                                width="20px"
+                                style={{ paddingTop: "7px" }}
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
             <div className={style.menu}>
-              <img src={chat} alt="chat icon" />
-              <img src={notifications} alt="notifications icon" />
-              <div className={style.menu__group}>
-                <span className={style.menu__group_text}>OJ</span>
-                <img src={menu} alt="menu icon" />
-              </div>
+                <img src={chat} alt="chat icon" />
+                <img src={notifications} alt="notifications icon" />
+                <div className={style.menu__group}>
+                    <span className={style.menu__group_text}>OJ</span>
+                    <img src={menu} alt="menu icon" />
+                </div>
             </div>
         </nav>
     )
