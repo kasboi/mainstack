@@ -1,9 +1,9 @@
 import style from "./Sidebar.module.css"
 
-import link from "../../assets/Icons/link.png"
-import store from "../../assets/Icons/store.png"
-import media_kit from "../../assets/Icons/media_kit.png"
-import invoicing from "../../assets/Icons/invoicing.png"
+import link from "../../assets/Icons/link.svg"
+import store from "../../assets/Icons/store.svg"
+import media_kit from "../../assets/Icons/media_kit.svg"
+import invoicing from "../../assets/Icons/invoicing.svg"
 
 import { Tooltip } from "react-tooltip"
 

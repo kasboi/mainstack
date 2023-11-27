@@ -1,0 +1,76 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 6rem 8rem;
+}
+
+/* BALANCE AND CHART */
+.left_container {
+  flex: 0 0 60%;
+}
+
+.balance {
+  display: flex;
+  gap: 0 5.5rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.balance_text {
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: #56616B;
+}
+
+.balance_amount {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.balance_btn {
+  cursor: pointer;
+  padding: 2rem 6.5rem;
+  border-radius: 10rem;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.chart_div {
+  width: 100%;
+  height: 100%;
+}
+
+/* LEDGER BALANCE */
+.right_container {
+  flex: 0 0 30%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem 0;
+}
+
+.wallet_balance {
+  display: flex;
+  gap: 0 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wallet_balance_text {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #56616B;
+  margin-bottom: 1rem;
+}
+
+.wallet_balance_amount {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+}
