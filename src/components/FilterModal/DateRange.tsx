@@ -6,17 +6,19 @@ import ChevronDownIcon from '../../assets/Icons/ChevronDown'
 
 import DatePicker from 'react-datepicker'
 
+import { useDate } from '../../zustand/FilterModal'
+
 interface Props {
-  fromValue: string,
-  toValue: string;
   onChange: (type: string, option: string) => void;
 }
 
-export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: Props) {
+export default function DateRange({ onChange }: Props) {
   const monthsInYear = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
+
+  const { fromDate, toDate } = useDate()
 
   return (
     <div className={`${styles.custom_select__ctn} ${styles.custom__date_picker}`} onSubmit={(e) => e.preventDefault()}>
@@ -40,7 +42,7 @@ export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: 
         )}
         customInput={(
           <button className={styles.select__bar}>
-            <span>{fromValue?.substring(4) || 'From Date'}</span>
+            <span>{fromDate?.substring(4) || 'Start Date'}</span>
             <div className={styles.icon}>
               <ChevronDownIcon />
             </div>
@@ -49,7 +51,7 @@ export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: 
       <Spacer minWidth={1} />
       <DatePicker
         peekNextMonth={false}
-        minDate={new Date(fromValue)}
+        minDate={new Date(fromDate)}
         onChange={(date) => onChange('TO', date ? date.toDateString() : '')}
         renderCustomHeader={({ date, increaseMonth, decreaseMonth }) => (
           <Flex marginBottom={4} justifyContent="space-between">
@@ -66,7 +68,7 @@ export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: 
         )}
         customInput={(
           <button className={styles.select__bar}>
-            <span>{toValue?.substring(4) || 'To Date'}</span>
+            <span>{toDate?.substring(4) || 'End Date'}</span>
             <div className={styles.icon}>
               <ChevronDownIcon />
             </div>

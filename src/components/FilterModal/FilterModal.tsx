@@ -1,26 +1,33 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { useState } from "react"
 import style from "./FilterModal.module.css"
-import CustomDoubleDateRange from "./CustomDoubleDateRange"
-// import CustomDateRange from './CustomDoubleDateRange'
+import DateRange from "./DateRange"
+
 import CustomSelect from "./CustomSelect"
 import CloseIcon from "../../assets/Icons/close"
 
-interface Props {
-    setFilters: Dispatch<SetStateAction<any>>
-}
-
 import { useModal } from "../../zustand/store"
 
-export default function FilterModal({ setFilters }: Props) {
-    const { isModalOpen, closeModal } = useModal()
+import { useDate, useFilter } from "../../zustand/FilterModal"
+import { setDateRange } from "../../utilities/functions"
 
-    const [closingModal, setClosingModal] = useState(false)
-    const [transactionStatus, setTransactionStatus] = useState<Array<string>>(
-        []
-    )
-    const [transactionType, setTransactionType] = useState<Array<string>>([])
-    const [fromDate, setFromDate] = useState("")
-    const [toDate, setToDate] = useState("")
+export default function FilterModal() {
+    const { isModalOpen, closeModal, closingModal, setClosingModal } =
+        useModal()
+    const {
+        fromDate,
+        toDate,
+        setFromDate,
+        setToDate,
+        transactionStatus,
+        setTransactionStatus,
+        transactionType,
+        setTransactionType,
+    } = useDate()
+
+    const { setFilter } = useFilter()
+
+    // const [closingModal, setClosingModal] = useState(false)
+    const [newDateRange, setNewDateRange] = useState(-1)
 
     const delayClose = (milli: number) => {
         setClosingModal(true)
@@ -31,7 +38,7 @@ export default function FilterModal({ setFilters }: Props) {
     }
 
     const applyFilters = () => {
-        setFilters({
+        setFilter({
             fromDate,
             toDate,
             transactionStatus,
@@ -40,12 +47,27 @@ export default function FilterModal({ setFilters }: Props) {
         delayClose(300)
     }
 
+    const selectDateRange = (daysDifference: number) => {
+        const todayDate = new Date()
+        const previousDate = new Date()
+        previousDate.setDate(todayDate.getDate() - daysDifference)
+
+        setToDate(todayDate.toDateString())
+        setFromDate(previousDate.toDateString())
+        setNewDateRange(daysDifference)
+    }
+
     const clearFilters = () => {
         setToDate("")
         setFromDate("")
         setTransactionStatus([])
         setTransactionType([])
-        setFilters({})
+        setFilter({
+            fromDate: "",
+            toDate: "",
+            transactionStatus: [],
+            transactionType: [],
+        })
         delayClose(300)
     }
 
@@ -88,22 +110,34 @@ export default function FilterModal({ setFilters }: Props) {
                     </div>
                     <div className={style.chips}>
                         <button
-                            className={`${style.primary_btn} ${style.chip}`}
+                            className={`${style.primary_btn} ${style.chip} ${
+                                newDateRange === 0 ? "active" : ""
+                            }`}
+                            onClick={() => selectDateRange(0)}
                         >
                             Today
                         </button>
                         <button
-                            className={`${style.primary_btn} ${style.chip}`}
+                            className={`${style.primary_btn} ${style.chip} ${
+                                newDateRange === 7 ? "active" : ""
+                            }`}
+                            onClick={() => selectDateRange(7)}
                         >
                             Last 7 days
                         </button>
                         <button
-                            className={`${style.primary_btn} ${style.chip}`}
+                            className={`${style.primary_btn} ${style.chip} ${
+                                newDateRange === 30 ? "active" : ""
+                            }`}
+                            onClick={() => selectDateRange(30)}
                         >
                             This month
                         </button>
                         <button
-                            className={`${style.primary_btn} ${style.chip}`}
+                            className={`${style.primary_btn} ${style.chip} ${
+                                newDateRange === 90 ? "active" : ""
+                            }`}
+                            onClick={() => selectDateRange(90)}
                         >
                             Last 3 months
                         </button>
@@ -111,13 +145,15 @@ export default function FilterModal({ setFilters }: Props) {
                     <form onSubmit={(e) => e.preventDefault()}>
                         <div className={style.form__input}>
                             <label>Date Range</label>
-                            <CustomDoubleDateRange
-                                fromValue={fromDate}
-                                toValue={toDate}
+                            <DateRange
                                 onChange={(type, date) => {
-                                    type === "FROM"
-                                        ? setFromDate(date)
-                                        : setToDate(date)
+                                    setDateRange(
+                                        type,
+                                        date,
+                                        setFromDate,
+                                        setToDate
+                                    )
+                                    setNewDateRange(-1)
                                 }}
                             />
                         </div>
@@ -127,16 +163,16 @@ export default function FilterModal({ setFilters }: Props) {
                                 label="Select Transaction Type"
                                 value={transactionType}
                                 options={[
-                                    "Store Transactions",
+                                    "deposit",
                                     "Get Tipped",
-                                    "Withdrawals",
+                                    "withdrawal",
                                     "Chargebacks",
                                     "Cashbacks",
                                     "Refer & Earn",
                                 ]}
-                                onChange={(option) =>
+                                onChange={(option) => {
                                     modifyArray("transactionType", option)
-                                }
+                                }}
                             />
                         </div>
                         <div className={style.form__input}>

@@ -1,0 +1,42 @@
+.empty__state {
+  max-width: 370px;
+  width: 100%;
+  text-align: left;
+  margin: 5% auto;
+
+}
+.empty__state h3 {
+  color: var(--dark);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.3rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+}
+.empty__state p {
+  color: var(--grey-text);
+  margin-bottom: 3.5rem;
+  line-height: 1.5rem;
+}
+
+.secondary_btn {
+  height: 50px;
+  cursor: pointer;
+  border-radius: 100px;
+  background: #e9edf8;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  transition: background .2s;
+}
+
+.secondary_btn:hover {
+  color: #000;
+  background: #d8dadf;
+}

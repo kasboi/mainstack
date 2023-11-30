@@ -1,22 +1,36 @@
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular-Medium.woff2");
+  src: url("./assets/fonts/Degular-Medium.woff2") format("embedded-opentype"),
+    url("./assets/fonts/Degular-Medium.woff2") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular-Semibold.woff2");
+  src: url("./assets/fonts/Degular-Semibold.woff2") format("embedded-opentype"),
+    url("./assets/fonts/Degular-Semibold.woff2") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular_Display-Bold.woff2");
+  src: url("./assets/fonts/Degular_Display-Bold.woff2")
+      format("embedded-opentype"),
+    url("./assets/fonts/Degular_Display-Bold.woff2") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
 * {
+  font-family: "Degular Display", "Inter", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* font-family: "Degular Display", "Inter", sans-serif; */
-
-  line-height: 1.5;
-  font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 
 html {

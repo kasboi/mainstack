@@ -1,26 +1,28 @@
 import { ChevronDownOutline, DownloadOutline } from "react-ionicons"
 import style from "./TransactionList.module.css"
 
-
 import incoming from "../../../assets/Icons/incoming.svg"
 import outgoing from "../../../assets/Icons/outgoing.svg"
 
-import { useModal } from "../../../zustand/store"
+import { useModal, useLoading, FilteredTransactions } from "../../../zustand/store"
+import EmptyState from "../../Filter/Filter"
+
+import { formatDate } from "../../../utilities/functions"
 
 const TransactionList = () => {
-    const {openModal} = useModal()
+    const { openModal } = useModal()
+    const { isLoading } = useLoading()
+    const { filterTransactions } = FilteredTransactions()
+
     return (
         <div className={style.container}>
             <div className={style.heading}>
                 <div className={style.heading_text}>
-                    <h3>24 Transactions</h3>
+                    <h3>{filterTransactions.length} Transactions</h3>
                     <p>Your transactions for the last 7 days</p>
                 </div>
                 <div className={style.heading_btn}>
-                    <button
-                        className={style.btn}
-                        onClick={() => openModal()}
-                    >
+                    <button className={style.btn} onClick={() => openModal()}>
                         Filter
                         <ChevronDownOutline
                             color={"#00000"}
@@ -39,29 +41,46 @@ const TransactionList = () => {
                     </button>
                 </div>
             </div>
-            <div className={style.transactions}>
-                <div className={style.transaction_box}>
-                    <img
-                        src={incoming}
-                        alt="incoming"
-                        className={style.transaction_type}
-                    />
-                    <div className={style.transaction_desc}>
-                        <p className={style.transaction_name}>
-                            Psychology of Money{" "}
-                        </p>
-                        <span className={style.transaction_status}>
-                            Roy Cash
-                        </span>
-                    </div>
-                    <div className={style.transaction_details}>
-                        <p className={style.transaction_amount}>USD600</p>
-                        <span className={style.transaction_date}>
-                            Apr 03,2022
-                        </span>
-                    </div>
+            {(isLoading || filterTransactions.length == 0) && <EmptyState />}
+            {filterTransactions && (
+                <div className={style.transactions}>
+                    {filterTransactions.map((transaction) => (
+                        <div className={style.transaction_box} key={transaction.payment_reference}>
+                            <img
+                                src={
+                                    transaction.type === "deposit"
+                                        ? incoming
+                                        : outgoing
+                                }
+                                alt={
+                                    transaction.type === "deposit"
+                                        ? "incoming"
+                                        : "outgoing"
+                                }
+                                className={style.transaction_type}
+                            />
+                            <div className={style.transaction_desc}>
+                                <p className={style.transaction_name}>
+                                    {transaction.metadata?.product_name ||
+                                        "Cash Withdrawal"}
+                                </p>
+                                <span className={style.transaction_status}>
+                                    {transaction.metadata?.name ||
+                                        transaction.status}
+                                </span>
+                            </div>
+                            <div className={style.transaction_details}>
+                                <p className={style.transaction_amount}>
+                                    USD {transaction.amount.toFixed(2)}
+                                </p>
+                                <span className={style.transaction_date}>
+                                    {formatDate(transaction.date)}
+                                </span>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            </div>
+            )}
         </div>
     )
 }

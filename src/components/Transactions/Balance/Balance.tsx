@@ -3,10 +3,11 @@ import style from "./Balance.module.css"
 import Chart from "../Chart"
 import Skeleton from "../../Skeleton/Skeleton"
 
-import { useLoading } from "../../../zustand/store"
+import { useLoading, useWallet } from "../../../zustand/store"
 
 const Transactions = () => {
     const { isLoading } = useLoading()
+    const { wallet } = useWallet()
     return (
         <div className={style.container}>
             <div className={style.left_container}>
@@ -17,7 +18,7 @@ const Transactions = () => {
                             <Skeleton />
                         ) : (
                             <p className={style.balance_amount}>
-                                usd120,500.00
+                                usd {wallet?.balance.toFixed(2)}
                             </p>
                         )}
                     </div>
@@ -37,7 +38,7 @@ const Transactions = () => {
                             <Skeleton />
                         ) : (
                             <p className={style.wallet_balance_amount}>
-                                USD 0.00
+                                USD {wallet?.ledger_balance.toFixed(2)}
                             </p>
                         )}
                     </div>
@@ -56,7 +57,7 @@ const Transactions = () => {
                             <Skeleton />
                         ) : (
                             <p className={style.wallet_balance_amount}>
-                                USD 55,080.00
+                                USD {wallet?.total_payout.toFixed(2)}
                             </p>
                         )}
                     </div>
@@ -75,7 +76,7 @@ const Transactions = () => {
                             <Skeleton />
                         ) : (
                             <p className={style.wallet_balance_amount}>
-                                USD 175,580.00
+                                USD {wallet?.total_revenue.toFixed(2)}
                             </p>
                         )}
                     </div>
@@ -94,7 +95,7 @@ const Transactions = () => {
                             <Skeleton />
                         ) : (
                             <p className={style.wallet_balance_amount}>
-                                USD 0.00
+                                USD {wallet?.pending_payout.toFixed(2)}
                             </p>
                         )}
                     </div>

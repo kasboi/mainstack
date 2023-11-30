@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+# Mainstack Dashboard Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Mainstack Dashboard project! This dashboard provides a user-friendly interface for monitoring balances, viewing transactions, and more.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The Mainstack Dashboard consists of a fixed navbar, sidebar, a chart on the left, and balance information on the right. The balances are retrieved via API calls. Additionally, there is a transaction list that can be filtered using a modal.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Fixed navbar and sidebar for easy navigation
+- Dropdown options in the navbar, including 'Apps'
+- Left-side chart and right-side balance display
+- Transaction list with filtering capabilities through a modal
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. **Vite + React**: The project is built using Vite as the build tool and React for the user interface.
+2. **React-chartjs-2**: Utilized for integrating interactive charts into the dashboard.
+3. **React-tooltip**: Enhances user experience by providing tooltips for elements.
+4. **React-datepicker**: Enables date selection functionality in the project.
+5. **Typescript**: The entire codebase is written in TypeScript for better maintainability and type safety.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Getting Started
+
+1. Clone the repository: `git clone [repository_url]`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+
+## API Integration
+
+Make sure to configure the API endpoints for retrieving balances and transactions in the corresponding files.
+
+
+## License
+
+This project is licensed under the [LICENSE NAME] - see the [LICENSE.md](LICENSE.md) file for details.
+
+Happy coding!
