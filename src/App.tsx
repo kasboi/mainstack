@@ -24,7 +24,7 @@ function App() {
     const { startLoading, endLoading } = useLoading()
     const { setFilteredTransactions } = FilteredTransactions()
 
-    const { filter } = useFilter()
+    const { filter, setFilterCount } = useFilter()
 
     /**
      * Fetches wallet data from the API and updates the state.
@@ -58,7 +58,7 @@ function App() {
     }, [])
 
     useEffect(() => {
-        applyFilters(filter, transactions, setFilteredTransactions)
+        applyFilters(filter, transactions, setFilteredTransactions, setFilterCount)
     }, [filter])
     return (
         <>

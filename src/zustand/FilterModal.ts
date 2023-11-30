@@ -32,10 +32,11 @@ export const useDate = create<DateState>((set) => ({
         })),
 }))
 
-
 export interface FilterState {
     filter: Filter
+    filterCount: number
     setFilter: (filter: Filter) => void
+    setFilterCount: (filterCount: number) => void
 }
 // State management for filter values
 export const useFilter = create<FilterState>((set) => ({
@@ -45,5 +46,7 @@ export const useFilter = create<FilterState>((set) => ({
         transactionStatus: [],
         transactionType: [],
     },
+    filterCount: 0,
     setFilter: (filter: Filter) => set({ filter }),
+    setFilterCount: (val: number) => set({ filterCount: val }),
 }))

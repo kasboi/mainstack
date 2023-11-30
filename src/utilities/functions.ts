@@ -48,32 +48,49 @@ export const setDateRange = (
 }
 
 // APPLYING FILTERS --- // FILTERED DATA
-export const applyFilters = (filter: Filter, transactions: Transactions[], setterFn: (transactions: Transactions[]) => void) => {
-    const activeFilters = Object.values(filter)?.filter(val => val?.toString()).length
-    // setActiveFilters(activeFilters)
+export const applyFilters = (
+    filter: Filter,
+    transactions: Transactions[],
+    setterFn: (transactions: Transactions[]) => void,
+    filterCount: (filterCount: number) => void
+) => {
+    const activeFilters = Object.values(filter)?.filter((val) =>
+        val?.toString()
+    ).length
+    filterCount(activeFilters)
     if (transactions?.length > 0) {
-      if (activeFilters > 0) {
-        let tempFilteredTransactions = [...transactions]
-        // FILTER TRANSACTIONS
-        if (
-          filter?.transactionType?.length > 0 ||
-          filter?.transactionStatus?.length > 0 ||
-          filter?.fromDate ||
-          filter?.toDate
-        ) {
-          tempFilteredTransactions = transactions?.filter(trx => {
-            const datetime = new Date(trx.date).getTime()
+        if (activeFilters > 0) {
+            let tempFilteredTransactions = [...transactions]
+            // FILTER TRANSACTIONS
+            if (
+                filter?.transactionType?.length > 0 ||
+                filter?.transactionStatus?.length > 0 ||
+                filter?.fromDate ||
+                filter?.toDate
+            ) {
+                tempFilteredTransactions = transactions?.filter((trx) => {
+                    const datetime = new Date(trx.date).getTime()
 
-            return (filter?.transactionType?.length > 0 ? filter?.transactionType.includes(trx.type) : true) &&
-              (filter?.transactionStatus?.length > 0 ? filter?.transactionStatus.includes(trx.status) : true) &&
-              (filter?.toDate ? new Date(filter?.toDate)?.getTime() >= datetime : true) &&
-              (filter?.fromDate ? new Date(filter?.fromDate)?.getTime() <= datetime : true)
-          })
+                    return (
+                        (filter?.transactionType?.length > 0
+                            ? filter?.transactionType.includes(trx.type)
+                            : true) &&
+                        (filter?.transactionStatus?.length > 0
+                            ? filter?.transactionStatus.includes(trx.status)
+                            : true) &&
+                        (filter?.toDate
+                            ? new Date(filter?.toDate)?.getTime() >= datetime
+                            : true) &&
+                        (filter?.fromDate
+                            ? new Date(filter?.fromDate)?.getTime() <= datetime
+                            : true)
+                    )
+                })
+            }
+
+            setterFn(tempFilteredTransactions)
+        } else {
+            setterFn(transactions)
         }
-
-        setterFn(tempFilteredTransactions)
-      } else {
-        setterFn(transactions)
-      }
     }
 }

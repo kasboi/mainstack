@@ -5,6 +5,7 @@ import incoming from "../../../assets/Icons/incoming.svg"
 import outgoing from "../../../assets/Icons/outgoing.svg"
 
 import { useModal, useLoading, FilteredTransactions } from "../../../zustand/store"
+import { useFilter } from "../../../zustand/FilterModal"
 import EmptyState from "../../Filter/Filter"
 
 import { formatDate } from "../../../utilities/functions"
@@ -13,6 +14,7 @@ const TransactionList = () => {
     const { openModal } = useModal()
     const { isLoading } = useLoading()
     const { filterTransactions } = FilteredTransactions()
+    const {filterCount} = useFilter()
 
     return (
         <div className={style.container}>
@@ -24,6 +26,7 @@ const TransactionList = () => {
                 <div className={style.heading_btn}>
                     <button className={style.btn} onClick={() => openModal()}>
                         Filter
+                        {filterCount > 0 && <span className={style.count}>{filterCount}</span>}
                         <ChevronDownOutline
                             color={"#00000"}
                             height="18px"
